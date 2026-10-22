@@ -1,0 +1,19 @@
+# Dependencies
+backend/node_modules/
+
+# Environment files
+backend/.env
+.env
+.env.*
+!.env.example
+!backend/.env.example
+
+# Build and generated output
+backend/dist/
+backend/generated/
+backend/coverage/
+backend/*.tsbuildinfo
+
+# Runtime and local data
+*.log
+pgdata/
