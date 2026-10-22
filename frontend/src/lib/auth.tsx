@@ -45,8 +45,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }, []);
 
     useEffect(() => {
-    loadUser();
-    }, [loadUser]);
+        const onUnauthorized = () => {
+            setUser(null);
+            router.replace('/login');
+        };
+        window.addEventListener('drivo:unauthorized', onUnauthorized);
+        return () =>
+            window.removeEventListener('drivo:unauthorized', onUnauthorized);
+    }, [router]);
 
     async function authenticate(path: string, body: object) {
     const { accessToken } = await api<{ accessToken: string }>(path, {

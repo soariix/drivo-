@@ -36,8 +36,8 @@ export async function api<T>(
     }
 
     if (res.status === 401 && token) {
-    tokenStore.clear();
-    window.location.href = '/login';
+        tokenStore.clear();
+        window.dispatchEvent(new Event('drivo:unauthorized'));
     }
 
     if (!res.ok) {

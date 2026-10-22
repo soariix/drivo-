@@ -17,21 +17,21 @@ model (modelo/versão; se vier como "MARCA/MODELO", separe o modelo),
 manufactureYear (ano de fabricação, número),
 modelYear (ano do modelo, número),
 color (cor, primeira letra maiúscula),
-fuel (combustível, ex: Gasolina, Flex, Diesel, Híbrido),
+fuel (combustível, ex: Gasolina, Etanol, Flex, Diesel, Híbrido, Elétrico, GNV),
 type ("Automóvel" ou "Moto").
 Se não encontrar algum campo, use null. Não escreva nada além do JSON.`;
 
 @Injectable()
 export class CrlvService {
+    private readonly logger = new Logger(CrlvService.name);
     private ai: GoogleGenAI;
     private model: string;
-    private readonly logger = new Logger(CrlvService.name);
 
     constructor(config: ConfigService) {
     this.ai = new GoogleGenAI({
         apiKey: config.getOrThrow<string>('GEMINI_API_KEY'),
     });
-    this.model = config.get<string>('GEMINI_MODEL') ?? 'gemini-2.5-flash';
+    this.model = config.get<string>('GEMINI_MODEL') ?? 'gemini-3.5-flash';
     }
 
     async scan(file: Express.Multer.File) {
@@ -52,13 +52,16 @@ export class CrlvService {
         });
         text = response.text;
     } catch (err) {
-        this.logger.error('Erro ao chamar o Gemini', err);
-        throw new BadGatewayException('Falha ao consultar o Gemini. Tente novamente.');
+        this.logger.error(`Erro ao chamar o Gemini (modelo: ${this.model})`, err);
+        throw new BadGatewayException(
+        'Falha ao consultar o Gemini. Tente novamente.',
+        );
     }
 
     try {
         return JSON.parse(text ?? '');
     } catch {
+        this.logger.error('Resposta do Gemini não é um JSON válido', text);
         throw new UnprocessableEntityException(
         'Não foi possível ler os dados do documento.',
         );

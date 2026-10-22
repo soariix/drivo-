@@ -9,7 +9,7 @@ export function VehicleCard({ vehicle: v }: { vehicle: Vehicle }) {
         href={`/veiculos/${v.id}`}
         className="group overflow-hidden rounded-2xl bg-surface ring-1 ring-line transition hover:ring-brand/60"
     >
-        <div className="flex h-36 items-center justify-center bg-gradient-to-br from-[#2c2c2e] to-[#0b0b0c]">
+        <div className="flex h-36 items-center justify-center bg-linear-to-br from-[#2c2c2e] to-[#0b0b0c]">
         <Car className="size-12 text-muted/60" />
         </div>
 

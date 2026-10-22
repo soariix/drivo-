@@ -35,7 +35,7 @@ export function AuthShell({
         className="relative hidden w-[44%] overflow-hidden rounded-3xl bg-[#111] bg-cover bg-center lg:block"
         style={{ backgroundImage: "url('/auth-bg.jpg')" }}
         >
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/30 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 p-8">
             <h2 className="max-w-xs text-3xl font-bold leading-tight">{headline}</h2>
             <p className="mt-3 max-w-sm text-xs text-muted">{description}</p>

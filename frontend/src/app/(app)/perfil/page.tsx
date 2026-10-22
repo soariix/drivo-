@@ -1,6 +1,6 @@
 'use client';
 
-import { FormEvent, ReactNode, useState } from 'react';
+import {ReactNode, SyntheticEvent, useState } from 'react';
 import { api } from '@/lib/api';
 import { useAuth } from '@/lib/auth';
 import { getInitials, memberSince } from '@/lib/format';
@@ -64,7 +64,7 @@ function ProfileForm({ user, onSaved }: { user: User; onSaved: (u: User) => void
   const [saving, setSaving] = useState(false);
   const [status, setStatus] = useState<Status>(null);
 
-  async function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus(null);
     if (!firstName.trim()) {
@@ -116,7 +116,7 @@ function PasswordForm() {
   const [saving, setSaving] = useState(false);
   const [status, setStatus] = useState<Status>(null);
 
-  async function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus(null);
     if (next.length < 8) {
