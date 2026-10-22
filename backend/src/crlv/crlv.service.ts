@@ -1,6 +1,7 @@
 import {
     BadGatewayException,
     Injectable,
+    Logger,
     UnprocessableEntityException,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
@@ -24,6 +25,7 @@ Se não encontrar algum campo, use null. Não escreva nada além do JSON.`;
 export class CrlvService {
     private ai: GoogleGenAI;
     private model: string;
+    private readonly logger = new Logger(CrlvService.name);
 
     constructor(config: ConfigService) {
     this.ai = new GoogleGenAI({
@@ -49,7 +51,8 @@ export class CrlvService {
         config: { responseMimeType: 'application/json' },
         });
         text = response.text;
-    } catch {
+    } catch (err) {
+        this.logger.error('Erro ao chamar o Gemini', err);
         throw new BadGatewayException('Falha ao consultar o Gemini. Tente novamente.');
     }
 

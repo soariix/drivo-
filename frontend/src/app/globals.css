@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@theme inline {
+      --color-surface: #1c1c1e;
+      --color-surface-2: #2c2c2e;
+      --color-line: #2c2c2e;
+      --color-muted: #8e8e93;
+      --color-brand: #0a84ff;
+      --color-danger: #ff453a;
+      --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background: #000;
+  color: #fff;
+}
