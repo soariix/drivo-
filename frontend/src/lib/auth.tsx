@@ -45,8 +45,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }, []);
 
     useEffect(() => {
+        const timeout = window.setTimeout(() => {
+            void loadUser();
+        }, 0);
+        return () => window.clearTimeout(timeout);
+    }, [loadUser]);
+
+    useEffect(() => {
         const onUnauthorized = () => {
             setUser(null);
+            setLoading(false);
             router.replace('/login');
         };
         window.addEventListener('drivo:unauthorized', onUnauthorized);

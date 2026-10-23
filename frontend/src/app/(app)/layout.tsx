@@ -14,7 +14,8 @@ export default function AppLayout({ children }: { children: ReactNode }) {
     if (!loading && !user) router.replace('/login');
   }, [loading, user, router]);
 
-  if (loading || !user) return <FullPageSpinner />;
+  if (loading) return <FullPageSpinner />;
+  if (!user) return null;
 
   return (
     <>
