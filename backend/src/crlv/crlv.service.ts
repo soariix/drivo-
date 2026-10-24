@@ -21,7 +21,7 @@ fuel (combustível, ex: Gasolina, Etanol, Flex, Diesel, Híbrido, Elétrico, GNV
 type ("Automóvel" ou "Moto").
 Se não encontrar algum campo, use null. Não escreva nada além do JSON.`;
 
-const RETRYABLE_STATUS = [429, 500, 503];
+const RETRYABLE_STATUS = [500, 503];
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function detectMimeType(buffer: Buffer, fallback: string): string {
